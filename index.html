@@ -1,10 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Valentine</title>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+* {
+  box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
+}
+
+body {
+  margin: 0;
+  background: #fff0f6;
+  overflow: hidden;
+}
+
+/* SCREEN */
+.screen {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.screen.active {
+  display: flex;
+}
+
+/* PIXEL BUTTON */
+.pixel-btn {
+  margin: 10px;
+  padding: 15px 30px;
+  background: #ff77aa;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow:
+    0 0 0 4px #000,
+    4px 4px 0 4px #000;
+}
+
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 4px #000;
+}
+
+/* PIXEL DOG */
+.dog {
+  font-size: 48px;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  animation: walk 6s linear infinite alternate;
+}
+
+@keyframes walk {
+  from { left: -50px; }
+  to { left: 100vw; }
+}
+
+/* QUESTION */
+.question {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* LOVE SCREEN */
+.love-screen {
+  background: pink;
+}
+
+.love-text {
+  font-size: 24px;
+  color: white;
+  text-shadow: 3px 3px #ff3b7f;
+  z-index: 2;
+}
+
+/* FLOATING HEARTS */
+.heart {
+  position: absolute;
+  bottom: -20px;
+  font-size: 24px;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+</style>
 </head>
+
 <body>
-  <h1>Hai kamu ❤️</h1>
-  <p>Aku bikin ini khusus buat kamu.</p>
+
+<!-- SCREEN 1 -->
+<div class="screen active" id="screen1">
+  <div class="dog">🐕‍🦺</div>
+
+  <div class="question">
+    Shaffiya,<br><br>
+    would you be my Valentine?<br><br>
+    <span style="font-size:10px;">from R.N</span>
+  </div>
+
+  <div>
+    <button class="pixel-btn" onclick="goLove()">YES</button>
+    <button class="pixel-btn" onclick="goLove()">YES</button>
+  </div>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen love-screen" id="screen2">
+  <div class="love-text">YAAAAAAAYYYYY<br><br>LOVE U 💖</div>
+</div>
+
+<script>
+function goLove() {
+  document.getElementById('screen1').classList.remove('active');
+  document.getElementById('screen2').classList.add('active');
+  spawnHearts();
+}
+
+function spawnHearts() {
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.innerText = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+  }, 300);
+}
+</script>
+
 </body>
 </html>
