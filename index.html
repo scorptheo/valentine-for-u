@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Kandang Tarung: Era Kebangkitan Hewan Gabut</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ===== ROOT VARIABLES ===== */
@@ -574,3 +576,1491 @@ body::before {
   font-family: 'Press Start 2P', monospace;
   font-size: 1.8rem;
   margin-bottom: 8px;
+  animation: resultBounce 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes resultBounce {
+  0% { transform: scale(0) rotate(-10deg); opacity:0; }
+  60% { transform: scale(1.2) rotate(3deg); }
+  100% { transform: scale(1) rotate(0); opacity:1; }
+}
+.result-win { color: var(--neon); text-shadow: 0 0 30px var(--neon); }
+.result-lose { color: var(--neon2); text-shadow: 0 0 30px var(--neon2); }
+
+.result-reason {
+  font-size: 0.65rem;
+  color: var(--neon3);
+  margin-bottom: 16px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.result-card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.result-card h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--neon);
+  margin-bottom: 10px;
+}
+
+.mvp-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0,255,136,0.05);
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+}
+.mvp-emoji { font-size: 2.5rem; }
+.mvp-info h4 { font-size: 0.8rem; font-weight: 700; color: var(--neon); }
+.mvp-info p { font-size: 0.6rem; color: var(--text2); }
+
+.funniest-moment {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.6rem;
+  color: var(--text2);
+  font-style: italic;
+  border-left: 3px solid var(--neon3);
+}
+
+.share-text {
+  background: rgba(0,0,0,0.4);
+  border: 1px dashed rgba(0,255,136,0.3);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 0.6rem;
+  color: var(--neon);
+  margin-bottom: 12px;
+  word-break: break-all;
+  font-family: monospace;
+}
+
+/* ===== CONFETTI ===== */
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  top: -10px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  to { transform: translateY(110vh) rotate(720deg); opacity:0; }
+}
+
+/* ===== SCREEN SHAKE ===== */
+@keyframes screenShake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+.screen-shake {
+  animation: screenShake 0.5s ease;
+}
+
+/* ===== EASTER EGG ===== */
+.easter-egg-unlock {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #FFD700, #FF6B35);
+  color: #000;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  padding: 20px;
+  border-radius: 16px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 0 60px rgba(255,215,0,0.8);
+  animation: eggPop 0.5s ease;
+  display: none;
+}
+@keyframes eggPop {
+  from { transform: translate(-50%, -50%) scale(0); }
+  to { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* ===== VS DIVIDER ===== */
+.vs-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  color: var(--neon3);
+  padding: 0 4px;
+  text-shadow: 0 0 10px var(--neon3);
+  flex-shrink: 0;
+}
+
+/* ===== BATTLE SPEED ===== */
+.battle-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.speed-btn {
+  flex: 1;
+  padding: 8px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.speed-btn.active { border-color: var(--neon); color: var(--neon); background: var(--glass2); }
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--neon); border-radius: 2px; }
+
+/* ===== CANVAS (hidden, for share card) ===== */
+#shareCanvas { display:none; }
+
+/* Loading spinner */
+.loading-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+.loading-dots span {
+  width: 6px; height: 6px;
+  background: var(--neon);
+  border-radius: 50%;
+  animation: loadDot 0.8s ease infinite;
+}
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes loadDot {
+  0%,100% { transform: scale(1); opacity:0.5; }
+  50% { transform: scale(1.5); opacity:1; }
+}
+
+/* Rojali stat pills */
+.stat-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 4px;
+  flex-wrap: wrap;
+}
+.stat-pill {
+  font-size: 0.4rem;
+  padding: 1px 5px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text2);
+}
+</style>
+</head>
+<body>
+
+<!-- Easter Egg Popup -->
+<div class="easter-egg-unlock" id="eggPopup">
+  🌟 TUHAN UNLOCKED! 🌟<br><br>
+  "Banned Permanen" tersedia
+</div>
+
+<!-- Canvas for share card -->
+<canvas id="shareCanvas" width="1080" height="1920"></canvas>
+
+<div id="app">
+
+  <!-- ===== SCREEN 1: TEAM SELECTION ===== -->
+  <div class="screen active" id="select-screen">
+    <div class="game-logo" id="gameLogo">
+      <h1>KANDANG TARUNG</h1>
+      <div class="subtitle">⚔ ERA KEBANGKITAN HEWAN GABUT ⚔</div>
+    </div>
+
+    <div class="daily-banner" id="dailyBanner">
+      <div class="badge">ROJALI</div>
+      <div class="info">
+        <b id="dailyName">Memuat...</b>
+        <small>HEWAN HARI INI • STATS 2x LEBIH SAKIT</small>
+      </div>
+      <div style="font-size:1.5rem" id="dailyEmoji">⭐</div>
+    </div>
+
+    <div class="section-title">▸ PILIH 3 HEWAN TIM LO (9 DARI 20+)</div>
+    
+    <div class="animal-grid" id="animalGrid"></div>
+
+    <div class="selected-team">
+      <h3>👥 TIM GUA:</h3>
+      <div class="team-slots" id="teamSlots">
+        <div class="team-slot" id="slot0"><span class="slot-empty">???</span></div>
+        <div class="team-slot" id="slot1"><span class="slot-empty">???</span></div>
+        <div class="team-slot" id="slot2"><span class="slot-empty">???</span></div>
+      </div>
+      <div class="team-code" id="teamCodeDisplay">KODE: pilih dulu 3 hewan...</div>
+    </div>
+
+    <div class="friend-code-section">
+      <label>⚔ KODE TIM MUSUH (kosongkan = vs BOT)</label>
+      <input type="text" id="friendCodeInput" placeholder="AYAM-CAPY-CICAK-420" maxlength="30">
+    </div>
+
+    <button class="btn btn-primary" id="battleBtn" disabled>⚔ TARUNG SEKARANG!</button>
+    <button class="btn btn-secondary" id="refreshAnimalsBtn">🔀 GANTI HEWAN (refresh)</button>
+  </div>
+
+  <!-- ===== SCREEN 2: BATTLE ===== -->
+  <div class="screen" id="battle-screen">
+    <div class="battle-header">
+      <div class="round-badge" id="roundBadge">RONDE 1/6</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        <button class="sound-btn" id="soundToggle" onclick="toggleSound()">🔊</button>
+      </div>
+    </div>
+
+    <div class="battle-controls">
+      <button class="speed-btn active" id="speed1x" onclick="setSpeed(1)">▶ 1x</button>
+      <button class="speed-btn" id="speed2x" onclick="setSpeed(2)">▶▶ 2x</button>
+      <button class="speed-btn" id="speedSkip" onclick="setSpeed(0)">⏭ SKIP</button>
+    </div>
+
+    <div class="battle-arena">
+      <div class="battle-team player">
+        <h4>⚔ TIM GUA</h4>
+        <div id="playerTeamDisplay"></div>
+      </div>
+      <div class="vs-divider">VS</div>
+      <div class="battle-team enemy">
+        <h4>💀 MUSUH</h4>
+        <div id="enemyTeamDisplay"></div>
+      </div>
+    </div>
+
+    <div class="battle-log" id="battleLog">
+      <div class="log-entry log-normal">⚔ Pertarungan dimulai! Semua hewan sudah ngecat muka...</div>
+    </div>
+
+    <div class="ghost-chat">
+      <h4>👻 PENONTON GAIB CHAT</h4>
+      <div class="ghost-messages" id="ghostMessages"></div>
+    </div>
+  </div>
+
+  <!-- ===== SCREEN 3: RESULT ===== -->
+  <div class="screen" id="result-screen">
+    <div style="margin-bottom:16px">
+      <div class="result-banner" id="resultBanner">🏆 MENANG!</div>
+      <div class="result-reason" id="resultReason">"Musuh disita Banpol"</div>
+    </div>
+
+    <div class="result-card">
+      <h3>⭐ MVP BATTLE:</h3>
+      <div class="mvp-display" id="mvpDisplay"></div>
+    </div>
+
+    <div class="result-card">
+      <h3>😭 MOMEN PALING ABSURD:</h3>
+      <div class="funniest-moment" id="funniestMoment">...</div>
+    </div>
+
+    <div class="result-card">
+      <h3>📤 SHARE KE TEMEN:</h3>
+      <div class="share-text" id="shareTextDisplay">...</div>
+      <button class="btn btn-primary" id="waShareBtn" onclick="shareToWA()">📲 Share ke WhatsApp</button>
+      <button class="btn btn-secondary" onclick="downloadShareCard()">🖼 Download Share Card</button>
+    </div>
+
+    <button class="btn btn-secondary" onclick="rematch()">🔄 REMATCH!</button>
+    <button class="btn btn-secondary" onclick="newTeam()" style="margin-top:8px">🐾 BIKIN TIM BARU</button>
+  </div>
+
+</div>
+
+<!-- Particles container -->
+<div id="particles"></div>
+
+<script>
+// ===== DATABASE HEWAN =====
+const ANIMALS_DB = [
+  {
+    id: 'ayam',
+    name: 'Ayam Geprek\nLv.99',
+    emoji: '🐔',
+    class: 'Tank',
+    skill: 'Pukulan Cabe Setan',
+    skillDesc: 'Deal 30 dmg, 50% enemy nangis skip turn',
+    hp: 130, atk: 22,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const dmg = 30;
+      t.hp = Math.max(0, t.hp - dmg);
+      const cried = Math.random() < 0.5;
+      if (cried) t.skipTurn = true;
+      return { log: `🌶️ ${attacker.name} nge-sambel ${t.name}! DMG: ${dmg}${cried ? '. Musuh NANGIS skip giliran! 😭' : ''}`, type: cried?'ult':'crit', dmg, target: t };
+    }
+  },
+  {
+    id: 'capybara',
+    name: 'Capybara\nPemalas',
+    emoji: '🦫',
+    class: 'Healer',
+    skill: 'Meditasi Santuy',
+    skillDesc: 'Heal semua ally 20 HP, speed -10',
+    hp: 100, atk: 10,
+    ultimate: (battle, attacker, allies) => {
+      allies.forEach(a => { if (a.hp > 0) a.hp = Math.min(a.maxHp, a.hp + 20); });
+      return { log: `🛁 ${attacker.name} rebahan dan heal semua +20 HP. Suasana jadi ngantuk...`, type: 'heal', heal: 20, target: null };
+    }
+  },
+  {
+    id: 'cicak',
+    name: 'Cicak CEO\nBitcoin',
+    emoji: '🦎',
+    class: 'Mage',
+    skill: 'Lempar Rugi 80%',
+    skillDesc: 'Enemy overthinking, loses 1 turn',
+    hp: 90, atk: 18,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      t.skipTurn = true;
+      return { log: `📉 ${attacker.name} spam chart merah ke ${t.name}. ${t.name} OVERTHINKING skip turn! "PORTOFOLIOKU MERAHHH!!"`, type: 'ult', dmg: 0, target: t };
+    }
+  },
+  {
+    id: 'bebek',
+    name: 'Bebek\nInfluencer',
+    emoji: '🦆',
+    class: 'Support',
+    skill: 'Endorse Skincare Abal',
+    skillDesc: 'Beri random ally 30 shield',
+    hp: 95, atk: 12,
+    ultimate: (battle, attacker, allies) => {
+      const t = allies.filter(a=>a.hp>0)[Math.floor(Math.random()*allies.filter(a=>a.hp>0).length)];
+      if (!t) return { log: `🫧 ${attacker.name} ga ada yang mau di-endorse...`, type: 'normal', dmg: 0 };
+      t.shield = (t.shield||0) + 30;
+      return { log: `🧴 ${attacker.name}: "Pakai skincare ini ya bestie~" ${t.name} dapat SHIELD +30! ✨`, type: 'heal', target: t };
+    }
+  },
+  {
+    id: 'kucing',
+    name: 'Kucing Oren\nBarbar',
+    emoji: '🐱',
+    class: 'DPS',
+    skill: 'Parkour Kulkas',
+    skillDesc: 'Steal 25 HP dari musuh',
+    hp: 105, atk: 24,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const stolen = Math.min(25, t.hp);
+      t.hp -= stolen;
+      attacker.hp = Math.min(attacker.maxHp, attacker.hp + stolen);
+      return { log: `🏃 ${attacker.name} parkour dari kulkas, NYEDOT ${stolen} HP dari ${t.name}! Sehat gw, sakit lo!`, type: 'crit', dmg: stolen, target: t };
+    }
+  },
+  {
+    id: 'semut',
+    name: 'Semut Pekerja\nRodi',
+    emoji: '🐜',
+    class: 'Debuffer',
+    skill: 'Rapat Deadline',
+    skillDesc: 'Kurangi attack musuh 50% 2 turn',
+    hp: 85, atk: 14,
+    ultimate: (battle, attacker, targets) => {
+      targets.forEach(t => { if(t.hp>0) { t.atkDebuff = 2; } });
+      return { log: `📋 ${attacker.name} adain rapat mendadak! Semua musuh LOYO attack -50% selama 2 turn. "Meeting lagi???"`, type: 'ult', dmg: 0 };
+    }
+  },
+  {
+    id: 'tupai',
+    name: 'Tupai Joki\nSkripsi',
+    emoji: '🐿️',
+    class: 'Mage',
+    skill: 'ChatGPT Mode',
+    skillDesc: 'Copy skill terakhir musuh',
+    hp: 90, atk: 16,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const dmg = 20 + Math.floor(Math.random()*15);
+      t.hp = Math.max(0, t.hp - dmg);
+      return { log: `🤖 ${attacker.name}: "Aku copy pake ChatGPT!" CTRL+C skill musuh → ${t.name} kena ${dmg} dmg. Plagiarisme +15 dmg!`, type: 'crit', dmg, target: t };
+    }
+  },
+  {
+    id: 'sapi',
+    name: 'Sapi Honkai\nStar Rail',
+    emoji: '🐄',
+    class: 'Tank',
+    skill: 'Gacha Ampas',
+    skillDesc: 'Taunt all enemies, 70% chance self-dmg 10',
+    hp: 150, atk: 20,
+    ultimate: (battle, attacker, targets) => {
+      const selfDmg = Math.random() < 0.7;
+      if (selfDmg) attacker.hp = Math.max(0, attacker.hp - 10);
+      targets.forEach(t => { if(t.hp>0) t.taunted = 1; });
+      return { log: selfDmg 
+        ? `🎰 ${attacker.name} gacha... AMPAS! Kena damage sendiri -10 HP. Teman: "DIH TOL" tapi semua musuh aggro ke dia!`
+        : `🌟 ${attacker.name} gacha... DAPET UR! Taunt semua musuh! Musuh kebingungan mau nyerang siapa.`, 
+        type: selfDmg ? 'normal' : 'ult', dmg: selfDmg ? 10 : 0 };
+    }
+  },
+  {
+    id: 'kecebong',
+    name: 'Kecebong\nLord',
+    emoji: '🐸',
+    class: 'DPS',
+    skill: 'Evolusi Nggak Sengaja',
+    skillDesc: '20% jadi Kodok Giga: HP+50 ATK+20',
+    hp: 90, atk: 19,
+    ultimate: (battle, attacker, targets) => {
+      if (Math.random() < 0.2 && !attacker.evolved) {
+        attacker.evolved = true;
+        attacker.maxHp += 50; attacker.hp += 50; attacker.atk += 20;
+        attacker.name = 'Kodok GIGA'; attacker.emoji = '🐊';
+        return { log: `✨ KEJUTAN! ${attacker.name} BEREVOLUSI jadi KODOK GIGA!! HP+50 ATK+20!! Musuh: "Hah???"`, type: 'ult', dmg: 0 };
+      }
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const dmg = Math.floor(attacker.atk * 1.2);
+      t.hp = Math.max(0, t.hp - dmg);
+      return { log: `🐸 ${attacker.name} gigit ${t.name} -${dmg} HP. "Ntar gua evolusi, sabar!"`, type: 'normal', dmg, target: t };
+    }
+  },
+  {
+    id: 'tikus',
+    name: 'Tikus\nWarnet',
+    emoji: '🐭',
+    class: 'Support',
+    skill: 'Download DOTA 2',
+    skillDesc: 'Tim skip turn tapi +40 shield next round',
+    hp: 85, atk: 11,
+    ultimate: (battle, attacker, allies) => {
+      allies.forEach(a => { if(a.hp>0) { a.skipTurnNext = true; a.shield = (a.shield||0) + 40; }});
+      return { log: `💾 ${attacker.name}: "Tunggu, DOTA 2 gua mau selesai download!" Semua tim skip tapi dapat SHIELD +40 next turn!`, type: 'ult', dmg: 0 };
+    }
+  },
+  {
+    id: 'biawak',
+    name: 'Biawak Anak\nSenja',
+    emoji: '🦖',
+    class: 'Debuffer',
+    skill: 'Quotes Galau',
+    skillDesc: 'Enemy kena mental, accuracy -40%',
+    hp: 95, atk: 15,
+    ultimate: (battle, attacker, targets) => {
+      targets.forEach(t => { if(t.hp>0) t.accuracy = 0.6; });
+      const quotes = ['"Kamu pergi tanpa alasan, seperti WiFi yang tiba-tiba putus"', '"Aku lelah, tapi bukan ngantuk"', '"Mungkin kita hanya kebetulan"'];
+      return { log: `😔 ${attacker.name} kirim quotes: ${quotes[Math.floor(Math.random()*quotes.length)]}. Semua musuh KENA MENTAL, accuracy -40%!`, type: 'ult', dmg: 0 };
+    }
+  },
+  {
+    id: 'lele',
+    name: 'Lele PUBG',
+    emoji: '🐟',
+    class: 'DPS',
+    skill: 'Ngeprone di Air',
+    skillDesc: 'Dodge next attack, counter 35 dmg',
+    hp: 100, atk: 21,
+    ultimate: (battle, attacker, targets) => {
+      attacker.dodge = true;
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const dmg = 35;
+      t.hp = Math.max(0, t.hp - dmg);
+      return { log: `🎮 ${attacker.name} prone di air! Dodge aktif + counter ${t.name} -${dmg} dmg. "WINNER WINNER CATFISH DINNER!"`, type: 'crit', dmg, target: t };
+    }
+  },
+  {
+    id: 'hamster',
+    name: 'Hamster\nTrader',
+    emoji: '🐹',
+    class: 'Support',
+    skill: 'Pump & Dump',
+    skillDesc: 'Random effect: +40 HP atau -30 HP',
+    hp: 100, atk: 16,
+    ultimate: (battle, attacker, allies) => {
+      const pump = Math.random() < 0.5;
+      if (pump) {
+        allies.forEach(a => { if(a.hp>0) a.hp = Math.min(a.maxHp, a.hp+20); });
+        return { log: `📈 ${attacker.name}: "PUMP INCOMING!" Semua ally +20 HP. "To the moon!!🚀"`, type: 'heal' };
+      } else {
+        allies.forEach(a => { if(a.hp>0) a.hp = Math.max(1, a.hp-10); });
+        return { log: `📉 ${attacker.name}: "Rug pull!" Semua ally -10 HP. "Sorry bro wrong telegram group"`, type: 'normal' };
+      }
+    }
+  },
+  {
+    id: 'panda',
+    name: 'Panda\nAnti-Sosial',
+    emoji: '🐼',
+    class: 'Tank',
+    skill: 'Mode Introvert',
+    skillDesc: 'Block semua dmg 1 turn, balas 25 dmg',
+    hp: 140, atk: 17,
+    ultimate: (battle, attacker, targets) => {
+      attacker.blockAll = true;
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      t.hp = Math.max(0, t.hp - 25);
+      return { log: `🚫 ${attacker.name}: "Gua gamau ketemu siapapun hari ini." Block semua serangan + counter ${t.name} -25 dmg!`, type: 'ult', dmg: 25, target: t };
+    }
+  },
+  {
+    id: 'monyet',
+    name: 'Monyet\nEndorsement',
+    emoji: '🐒',
+    class: 'DPS',
+    skill: 'Lempar Review Bintang 1',
+    skillDesc: 'Spam serangan 3x, masing-masing 10 dmg',
+    hp: 95, atk: 18,
+    ultimate: (battle, attacker, targets) => {
+      let totalDmg = 0;
+      let msgs = [];
+      for(let i=0; i<3; i++) {
+        const t = targets[Math.floor(Math.random()*targets.length)];
+        const d = 10 + Math.floor(Math.random()*5);
+        t.hp = Math.max(0, t.hp - d);
+        totalDmg += d;
+        msgs.push(`${t.name} -${d}`);
+      }
+      return { log: `⭐ ${attacker.name} spam review bintang 1: "${msgs.join(', ')}"! Total ${totalDmg} dmg! "PRODUK PALSU PENIPU!!!"`, type: 'crit', dmg: totalDmg };
+    }
+  },
+  {
+    id: 'kupu',
+    name: 'Kupu-Kupu\nMotivator',
+    emoji: '🦋',
+    class: 'Healer',
+    skill: 'Seminar Motivasi',
+    skillDesc: 'Bangkitkan 1 ally mati dengan 30 HP',
+    hp: 85, atk: 10,
+    ultimate: (battle, attacker, allies) => {
+      const dead = allies.find(a => a.hp <= 0);
+      if (dead) {
+        dead.hp = 30;
+        return { log: `🦋 ${attacker.name}: "KAMU BISA BANGKIT!" ${dead.name} REVIVE dengan 30 HP!! "Man Jadda Wajada bro!"`, type: 'heal', target: dead };
+      }
+      allies.forEach(a => { if(a.hp>0) a.hp = Math.min(a.maxHp, a.hp+15); });
+      return { log: `🦋 ${attacker.name} seminar motivasi. Semua ally +15 HP. "Masalahmu bukan masalah!"`, type: 'heal' };
+    }
+  },
+  {
+    id: 'ular',
+    name: 'Ular\nMlm',
+    emoji: '🐍',
+    class: 'Debuffer',
+    skill: 'Ajak Join Bisnis',
+    skillDesc: 'Musuh confused, serang teman sendiri',
+    hp: 90, atk: 16,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      t.confused = true;
+      return { log: `💼 ${attacker.name}: "Mau income tambahan? Gabung tim kami!" ${t.name} CONFUSED, mungkin serang teman sendiri next turn!`, type: 'ult', dmg: 0, target: t };
+    }
+  },
+  {
+    id: 'burung',
+    name: 'Burung\nGosip',
+    emoji: '🦜',
+    class: 'Support',
+    skill: 'Sebar Berita Hoax',
+    skillDesc: 'Random musuh panik, dmg +50% next attack',
+    hp: 88, atk: 14,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[Math.floor(Math.random()*targets.length)];
+      const allies2 = battle.playerTeam.includes(attacker) ? battle.playerTeam : battle.enemyTeam;
+      const ally = allies2.filter(a=>a.hp>0)[0];
+      if(ally) ally.dmgBoost = 1.5;
+      return { log: `📰 ${attacker.name} sebar hoax! "${t.name} ternyata artis!" Tim sendiri semangat, next attack +50% dmg!`, type: 'ult', dmg: 0 };
+    }
+  },
+  {
+    id: 'tuhan',
+    name: 'TUHAN\n(Hidden)',
+    emoji: '✨',
+    class: 'Tank',
+    skill: 'Banned Permanen',
+    skillDesc: 'INSTA-KILL satu musuh, 100% work',
+    hp: 9999, atk: 99,
+    hidden: true,
+    ultimate: (battle, attacker, targets) => {
+      const t = targets[0];
+      const prevHp = t.hp;
+      t.hp = 0;
+      return { log: `🌟 TUHAN turun tangan. ${t.name} kena BAN PERMANEN! HP ${prevHp} → 0. "Tolong jangan lapor, ya?"`, type: 'ult', dmg: prevHp, target: t };
+    }
+  }
+];
+
+// ===== NARASI EXTRA =====
+const NARASI_NORMAL = [
+  (a, t, dmg) => `${a.emoji} ${a.name} nyerang ${t.name} dengan gaya! -${dmg} HP`,
+  (a, t, dmg) => `${a.emoji} ${a.name} hajar ${t.name}! ${t.name}: "SAKIT BANGETTT!" (-${dmg})`,
+  (a, t, dmg) => `${a.emoji} ${a.name} lakukan combo 3x! ${t.name} kena -${dmg} HP`,
+  (a, t, dmg) => `${a.emoji} ${a.name} ayunkan serangan. ${t.name} mundur -${dmg} HP`,
+];
+
+const NARASI_CRIT = [
+  (a, t, dmg) => `💥 CRITICAL!! ${a.name} HAJAR ${t.name} PARAH BANGET! -${dmg} HP!! "ANJAYYYY"`,
+  (a, t, dmg) => `🔥 GILA! ${a.name} crit ${t.name}! -${dmg}!! ${t.name}: "HADEH BANGET"`,
+  (a, t, dmg) => `⚡ CRITICAL HIT! ${a.name} → ${t.name}: -${dmg}! Penonton: "GASSS GASSS!"`,
+];
+
+const NARASI_MISS = [
+  (a, t) => `🌬️ ${a.name} miss! ${t.name} dodge sambil pura-pura ga liat.`,
+  (a, t) => `💨 ${a.name} serang ${t.name}... ngeleset! "Gua sengaja ngehindarin!"`,
+  (a, t) => `😅 ${a.name} ngayun kosong. ${t.name}: "Wkwkwk kurang tidur bro?"`,
+];
+
+const WIN_REASONS = [
+  'TIM LO MENANG KARENA MUSUH DISITA BANPOL',
+  'MUSUH MENDADAK DAPAT NOTIF SHOPEE, JADI LENGAH',
+  'TIM LO MENANG KARENA MUSUH LAGI ADA KUOTA NIGHT',
+  'MUSUH TIBA-TIBA INGAT SKRIPSI BELUM KELAR',
+  'TIM LO TERLALU SERAM, MUSUH MINTA DAMAI VIA DM',
+  'MUSUH KEHABISAN BATERAI 5% DI MOMEN PALING GENTING',
+  'TIM LO MENANG KARENA MUSUH KETIMPA TIANG LISTRIK',
+  'MUSUH KEBURU DIJEMPUT ORANG TUA',
+];
+
+const LOSE_REASONS = [
+  'LO KALAH KARENA SINYAL 1 BAR TERUS DARI TADI',
+  'TIM LO KEASYIKAN REBAHAN SAMPE LUPA BATTLE',
+  'MUSUH TERNYATA PAKAI JOKI DARI SURABAYA',
+  'TIM LO KALAH KARENA TERLALU BANYAK DRAMA',
+  'LO KALAH KARENA TIM LO LAGI NONTON DRAKOR',
+  'MUSUH TERNYATA DIA PAKAI CHEAT ENGINE VERSI TERBARU',
+  'TIM LO KEHABISAN STAMINA GEGARA BEGADANG',
+];
+
+const GHOST_NAMES = ['Genderuwo12','Pocong Cantik','Hantu Lama','Kuntilanak_Muda','DemitKampung99','SiPocong99','HantuKasir','JinWarnet','Sundel_Bolong22','OrangBunian7'];
+const GHOST_MSGS = [
+  msg => `GASS ${msg.toUpperCase()}!!`,
+  () => 'ih kok gitu sih 😭',
+  () => 'GW GA NYANGKA BISA SEKEREN ITU',
+  () => 'anjir anjir anjir',
+  () => 'kalau gini mah gua juga bisa',
+  () => 'HAHAHAHA GILEEEE',
+  () => 'makasih udah nemenin gw nonton 😭',
+  () => 'gw dari alam lain aja nonton nih',
+  () => 'HAJARRR SAMPE MATIII',
+  () => 'ehh ga nyangka lo bisa gitu',
+  () => 'skill issue bro skill issue',
+  () => 'GILA KRITIS KRITIS KRITIS',
+];
+
+// ===== STATE =====
+let state = {
+  displayedAnimals: [],
+  selectedAnimals: [],
+  playerTeam: [],
+  enemyTeam: [],
+  currentRound: 0,
+  maxRounds: 6,
+  battleLog: [],
+  battleActive: false,
+  soundOn: true,
+  speed: 1,
+  dailyAnimal: null,
+  logoClickCount: 0,
+  eggUnlocked: false,
+  funniestMoment: '',
+  teamCode: '',
+};
+
+// ===== DAILY ANIMAL =====
+function getDailyAnimal() {
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+  const normals = ANIMALS_DB.filter(a => !a.hidden);
+  return normals[seed % normals.length];
+}
+
+// ===== INIT =====
+function init() {
+  state.dailyAnimal = getDailyAnimal();
+  document.getElementById('dailyName').textContent = state.dailyAnimal.name.replace('\n',' ');
+  document.getElementById('dailyEmoji').textContent = state.dailyAnimal.emoji;
+  
+  // Check URL params
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  if (code) {
+    document.getElementById('friendCodeInput').value = code;
+  }
+  
+  refreshAnimals();
+  setupLogoClick();
+  createParticles();
+}
+function createParticles() {
+  const emojis = ['⚔️','🐾','💥','✨','🌟','💫','🔥'];
+  const container = document.getElementById('particles');
+  for(let i=0; i<8; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    p.style.left = Math.random()*100 + 'vw';
+    p.style.animationDelay = Math.random()*4 + 's';
+    p.style.animationDuration = (3 + Math.random()*3) + 's';
+    container.appendChild(p);
+  }
+  // Respawn particles
+  setInterval(() => {
+    document.querySelectorAll('.particle').forEach(p => {
+      p.style.left = Math.random()*100 + 'vw';
+      p.style.animationDelay = Math.random()*2 + 's';
+    });
+  }, 5000);
+}
+
+function setupLogoClick() {
+  document.getElementById('gameLogo').addEventListener('click', () => {
+    state.logoClickCount++;
+    if (state.logoClickCount >= 5 && !state.eggUnlocked) {
+      state.eggUnlocked = true;
+      showEasterEgg();
+    }
+  });
+}
+
+function showEasterEgg() {
+  const popup = document.getElementById('eggPopup');
+  popup.style.display = 'block';
+  setTimeout(() => {
+    popup.style.display = 'none';
+    refreshAnimals(); // Include Tuhan now
+  }, 3000);
+}
+
+// ===== ANIMAL GRID =====
+function refreshAnimals() {
+  const pool = ANIMALS_DB.filter(a => state.eggUnlocked || !a.hidden);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  state.displayedAnimals = shuffled.slice(0, 9);
+  
+  // Always show daily animal in grid
+  if (!state.displayedAnimals.find(a => a.id === state.dailyAnimal.id)) {
+    state.displayedAnimals[0] = state.dailyAnimal;
+  }
+  
+  state.selectedAnimals = [];
+  renderGrid();
+  updateTeamDisplay();
+  document.getElementById('battleBtn').disabled = true;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('animalGrid');
+  grid.innerHTML = '';
+  
+  state.displayedAnimals.forEach((animal, idx) => {
+    const isDaily = animal.id === state.dailyAnimal.id;
+    const card = document.createElement('div');
+    card.className = `animal-card${isDaily ? ' daily-boost' : ''}`;
+    card.dataset.idx = idx;
+    
+    card.innerHTML = `
+      <span class="animal-emoji">${animal.emoji}</span>
+      <div class="animal-name">${animal.name}</div>
+      <span class="animal-class class-${animal.class.toLowerCase()}">${animal.class.toUpperCase()}</span>
+      <div class="animal-skill">${animal.skill}</div>
+      ${isDaily ? '<div style="font-size:0.4rem;color:#FFE600;margin-top:2px">⭐ 2x STATS</div>' : ''}
+      <div class="stat-pills">
+        <span class="stat-pill">❤️${isDaily ? animal.hp*2 : animal.hp}</span>
+        <span class="stat-pill">⚔️${isDaily ? animal.atk*2 : animal.atk}</span>
+      </div>
+    `;
+    
+    card.addEventListener('click', () => selectAnimal(idx));
+    grid.appendChild(card);
+  });
+}
+
+function selectAnimal(idx) {
+  const animal = state.displayedAnimals[idx];
+  const selIdx = state.selectedAnimals.findIndex(a => a.idx === idx);
+  
+  if (selIdx !== -1) {
+    // Deselect
+    state.selectedAnimals.splice(selIdx, 1);
+  } else if (state.selectedAnimals.length < 3) {
+    // Select
+    state.selectedAnimals.push({ idx, animal });
+  } else {
+    // Replace last
+    state.selectedAnimals.pop();
+    state.selectedAnimals.push({ idx, animal });
+  }
+  
+  // Update card visuals
+  document.querySelectorAll('.animal-card').forEach((card, i) => {
+    card.classList.toggle('selected', state.selectedAnimals.some(s => s.idx === i));
+  });
+  
+  updateTeamDisplay();
+  
+  if (state.selectedAnimals.length === 3) {
+    state.teamCode = generateTeamCode();
+    document.getElementById('battleBtn').disabled = false;
+    // Update URL
+    window.history.replaceState({}, '', `?code=${state.teamCode}`);
+  } else {
+    document.getElementById('battleBtn').disabled = true;
+  }
+}
+
+function generateTeamCode() {
+  const animals = state.selectedAnimals.map(s => s.animal.id.toUpperCase().slice(0,4));
+  const suffix = Math.floor(Math.random()*900+100);
+  return `${animals[0]}-${animals[1]}-${animals[2]}-${suffix}`;
+}
+
+function updateTeamDisplay() {
+  for (let i = 0; i < 3; i++) {
+    const slot = document.getElementById(`slot${i}`);
+    const sel = state.selectedAnimals[i];
+    if (sel) {
+      slot.className = 'team-slot filled';
+      slot.innerHTML = `<span class="slot-emoji">${sel.animal.emoji}</span><div class="slot-name">${sel.animal.name}</div>`;
+    } else {
+      slot.className = 'team-slot';
+      slot.innerHTML = `<span class="slot-empty">???</span>`;
+    }
+  }
+  
+  if (state.selectedAnimals.length === 3) {
+    document.getElementById('teamCodeDisplay').textContent = `KODE: ${state.teamCode}`;
+  } else {
+    document.getElementById('teamCodeDisplay').textContent = `KODE: pilih dulu ${3-state.selectedAnimals.length} lagi...`;
+  }
+}
+
+// ===== TEAM CREATION =====
+function createBattleAnimal(animalData, isDaily) {
+  const mult = isDaily ? 2 : 1;
+  return {
+    ...animalData,
+    name: animalData.name.replace('\n',' '),
+    hp: animalData.hp * mult,
+    maxHp: animalData.hp * mult,
+    atk: animalData.atk * mult,
+    shield: 0,
+    skipTurn: false,
+    skipTurnNext: false,
+    dodge: false,
+    blockAll: false,
+    confused: false,
+    accuracy: 1,
+    atkDebuff: 0,
+    dmgBoost: 1,
+    evolved: false,
+    taunted: 0,
+    dailyBoost: isDaily,
+  };
+}
+
+function createRandomTeam() {
+  const pool = ANIMALS_DB.filter(a => !a.hidden);
+  const shuffled = [...pool].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3).map(a => createBattleAnimal(a, a.id === state.dailyAnimal.id));
+}
+
+function parseTeamCode(code) {
+  try {
+    const parts = code.toUpperCase().split('-');
+    if (parts.length < 3) return null;
+    const ids = parts.slice(0, 3).map(p => p.slice(0,4).toLowerCase());
+    const animals = ids.map(id => ANIMALS_DB.find(a => a.id.startsWith(id) || a.id === id));
+    if (animals.some(a => !a)) return null;
+    return animals.map(a => createBattleAnimal(a, a.id === state.dailyAnimal.id));
+  } catch(e) { return null; }
+}
+
+// ===== START BATTLE =====
+// eventListener dipasang di init() setelah DOM ready
+
+function startBattle() {
+  // Build player team
+  state.playerTeam = state.selectedAnimals.map(s => 
+    createBattleAnimal(s.animal, s.animal.id === state.dailyAnimal.id)
+  );
+  
+  // Build enemy team
+  const friendCode = document.getElementById('friendCodeInput').value.trim();
+  if (friendCode) {
+    const parsed = parseTeamCode(friendCode);
+    state.enemyTeam = parsed || createRandomTeam();
+  } else {
+    state.enemyTeam = createRandomTeam();
+  }
+  
+  state.currentRound = 0;
+  state.battleLog = [];
+  state.battleActive = true;
+  state.funniestMoment = '';
+  
+  showScreen('battle-screen');
+  renderBattleTeams();
+  
+  // Start battle loop
+  setTimeout(runBattle, 500);
+}
+
+// ===== RENDER BATTLE TEAMS =====
+function renderBattleTeams() {
+  renderTeam('playerTeamDisplay', state.playerTeam);
+  renderTeam('enemyTeamDisplay', state.enemyTeam);
+}
+
+function renderTeam(containerId, team) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  team.forEach((animal, idx) => {
+    const el = document.createElement('div');
+    el.className = `battle-animal${animal.hp <= 0 ? ' dead' : ''}`;
+    el.id = `ba-${containerId}-${idx}`;
+    el.innerHTML = renderBattleAnimal(animal);
+    container.appendChild(el);
+  });
+}
+
+function renderBattleAnimal(animal) {
+  const hpPct = Math.max(0, (animal.hp / animal.maxHp) * 100);
+  let barClass = 'hp-bar-green';
+  if (hpPct < 50) barClass = 'hp-bar-yellow';
+  if (hpPct < 25) barClass = 'hp-bar-red';
+  
+  return `
+    <div class="ba-header">
+      <span class="ba-emoji">${animal.emoji}</span>
+      <div class="ba-info">
+        <div class="ba-name">${animal.name}${animal.shield > 0 ? ' 🛡️'+animal.shield : ''}${animal.dailyBoost ? ' ⭐' : ''}</div>
+        <div class="ba-class">${animal.class}</div>
+      </div>
+    </div>
+    <div class="hp-bar-wrap">
+      <div class="hp-bar ${barClass}" style="width:${hpPct}%"></div>
+    </div>
+    <div class="hp-text">HP: ${Math.max(0,animal.hp)}/${animal.maxHp}</div>
+  `;
+}
+
+function updateBattleAnimalUI(team, teamIdx, containerPrefix) {
+  const animal = team[teamIdx];
+  const el = document.getElementById(`ba-${containerPrefix}-${teamIdx}`);
+  if (!el) return;
+  el.innerHTML = renderBattleAnimal(animal);
+  if (animal.hp <= 0) el.classList.add('dead');
+  else el.classList.remove('dead');
+}
+
+// ===== BATTLE LOOP =====
+async function runBattle() {
+  // Ghost chat
+  startGhostChat();
+  
+  for (let round = 1; round <= state.maxRounds; round++) {
+    state.currentRound = round;
+    document.getElementById('roundBadge').textContent = `RONDE ${round}/${state.maxRounds}`;
+    addLog(`⚔️ RONDE ${round} DIMULAI!`, 'round');
+    
+    // Each round: 3 turns (one per player animal slot, roughly)
+    for (let turn = 0; turn < 2; turn++) {
+      if (!isTeamAlive(state.playerTeam) || !isTeamAlive(state.enemyTeam)) break;
+      
+      // Player attacks
+      await doTurn(state.playerTeam, state.enemyTeam, 'playerTeamDisplay', 'enemyTeamDisplay');
+      if (!isTeamAlive(state.enemyTeam)) break;
+      
+      // Enemy attacks
+      await doTurn(state.enemyTeam, state.playerTeam, 'enemyTeamDisplay', 'playerTeamDisplay');
+      if (!isTeamAlive(state.playerTeam)) break;
+    }
+    
+    if (!isTeamAlive(state.playerTeam) || !isTeamAlive(state.enemyTeam)) break;
+    
+    await sleep(getDelay() * 0.5);
+  }
+  
+  endBattle();
+}
+
+async function doTurn(attackers, defenders, attackContainerId, defContainerId) {
+  const aliveAttackers = attackers.filter(a => a.hp > 0);
+  if (aliveAttackers.length === 0) return;
+  
+  const attacker = aliveAttackers[Math.floor(Math.random() * aliveAttackers.length)];
+  const attackerIdx = attackers.indexOf(attacker);
+  
+  // Skip turn check
+  if (attacker.skipTurn) {
+    attacker.skipTurn = false;
+    addLog(`😴 ${attacker.name} skip giliran... lagi nangis di pojokan.`, 'skip');
+    return;
+  }
+  
+  // Handle skipTurnNext
+  if (attacker.skipTurnNext) {
+    attacker.skipTurnNext = false;
+    attacker.skipTurn = true; // will skip next actual turn
+  }
+  
+  // Decrement debuffs
+  if (attacker.atkDebuff > 0) attacker.atkDebuff--;
+  if (attacker.taunted > 0) attacker.taunted--;
+  
+  // Highlight attacker
+  highlightActing(attackContainerId, attackerIdx);
+  
+  await sleep(getDelay() * 0.4);
+  
+  const aliveDefenders = defenders.filter(d => d.hp > 0);
+  if (aliveDefenders.length === 0) return;
+  
+  // Ultimate check (30%)
+  if (Math.random() < 0.3) {
+    const result = attacker.ultimate({ playerTeam: attackers, enemyTeam: defenders }, attacker, aliveDefenders);
+    
+    if (result.target && result.dmg > 0) {
+      applyDamage(result.target, result.dmg, defContainerId, defenders.indexOf(result.target), result.type === 'crit' ? 'crit' : 'ult');
+    }
+    if (result.heal) {
+      // Update all healers
+      attackers.forEach((a, i) => updateBattleAnimalUI(attackers, i, attackContainerId));
+    }
+    
+    addLog(result.log, result.type || 'ult');
+    if (result.type === 'ult' || result.type === 'crit') {
+      state.funniestMoment = result.log;
+      if (state.soundOn) playSound('ult');
+    }
+  } else {
+    // Normal attack
+    let target = aliveDefenders[Math.floor(Math.random() * aliveDefenders.length)];
+    
+    // Confused: attack ally
+    if (attacker.confused && Math.random() < 0.4) {
+      attacker.confused = false;
+      const allyAlive = attackers.filter(a => a.hp > 0 && a !== attacker);
+      if (allyAlive.length > 0) {
+        target = allyAlive[Math.floor(Math.random() * allyAlive.length)];
+        const d = Math.floor(attacker.atk * 0.7);
+        const targetIdx = attackers.indexOf(target);
+        applyDamage(target, d, attackContainerId, targetIdx, 'normal');
+        addLog(`😵 ${attacker.name} CONFUSED serang TEMAN SENDIRI ${target.name} -${d} HP!! "SALAH TARGET BRO???"`, 'crit');
+        if (state.soundOn) playSound('hit');
+        updateBattleAnimalUI(attackers, attackerIdx, attackContainerId);
+        return;
+      }
+    }
+    
+    const targetIdx = defenders.indexOf(target);
+    
+    // Miss check
+    const accuracy = attacker.accuracy || 1;
+    if (Math.random() > accuracy) {
+      const fn = NARASI_MISS[Math.floor(Math.random()*NARASI_MISS.length)];
+      addLog(fn(attacker, target), 'skip');
+      updateBattleAnimalUI(attackers, attackerIdx, attackContainerId);
+      return;
+    }
+    
+    // Dodge check
+    if (target.dodge) {
+      target.dodge = false;
+      addLog(`💨 ${attacker.name} serang ${target.name} tapi di-DODGE! "Gua udah prone dari tadi~"`, 'skip');
+      updateBattleAnimalUI(defenders, targetIdx, defContainerId);
+      return;
+    }
+    
+    // Block all
+    if (target.blockAll) {
+      target.blockAll = false;
+      addLog(`🛡️ ${target.name} BLOCK TOTAL! ${attacker.name} serangan mentah. "Ga mau ketemu lo dulu!"`, 'skip');
+      return;
+    }
+    
+    // Calc damage
+    let dmg = attacker.atk + Math.floor(Math.random() * 10) - 5;
+    if (attacker.atkDebuff > 0) dmg = Math.floor(dmg * 0.5);
+    if (attacker.dmgBoost > 1) { dmg = Math.floor(dmg * attacker.dmgBoost); attacker.dmgBoost = 1; }
+    dmg = Math.max(1, dmg);
+    
+    const isCrit = Math.random() < 0.2;
+    if (isCrit) dmg = Math.floor(dmg * 1.8);
+    
+    applyDamage(target, dmg, defContainerId, targetIdx, isCrit ? 'crit' : 'normal');
+    
+    let msg;
+    if (isCrit) {
+      const fn = NARASI_CRIT[Math.floor(Math.random()*NARASI_CRIT.length)];
+      msg = fn(attacker, target, dmg);
+      if (!state.funniestMoment) state.funniestMoment = msg;
+      shakeScreen();
+      if (state.soundOn) playSound('crit');
+    } else {
+      const fn = NARASI_NORMAL[Math.floor(Math.random()*NARASI_NORMAL.length)];
+      msg = fn(attacker, target, dmg);
+      if (state.soundOn) playSound('hit');
+    }
+    addLog(msg, isCrit ? 'crit' : 'normal');
+  }
+  
+  // Update both teams UI
+  attackers.forEach((a, i) => updateBattleAnimalUI(attackers, i, attackContainerId));
+  defenders.forEach((d, i) => updateBattleAnimalUI(defenders, i, defContainerId));
+}
+
+function applyDamage(target, dmg, containerId, idx, type) {
+  if (target.shield > 0) {
+    const absorbed = Math.min(target.shield, dmg);
+    target.shield -= absorbed;
+    dmg -= absorbed;
+  }
+  target.hp = Math.max(0, target.hp - dmg);
+  
+  // Show floating damage
+  const el = document.getElementById(`ba-${containerId}-${idx}`);
+  if (el && dmg > 0) {
+    showFloatingDamage(el, `-${dmg}`, type === 'crit' ? 'dmg-crit' : type === 'heal' ? 'dmg-heal' : 'dmg-normal');
+    el.classList.add('hit');
+    setTimeout(() => el.classList.remove('hit'), 400);
+  }
+  
+  updateBattleAnimalUI(
+    containerId.includes('player') ? state.playerTeam : state.enemyTeam,
+    idx,
+    containerId
+  );
+}
+
+function showFloatingDamage(parentEl, text, cls) {
+  const dmgEl = document.createElement('div');
+  dmgEl.className = `float-dmg ${cls}`;
+  dmgEl.textContent = text;
+  dmgEl.style.top = Math.random() * 20 + 'px';
+  dmgEl.style.left = Math.random() * 40 + 20 + 'px';
+  parentEl.style.position = 'relative';
+  parentEl.appendChild(dmgEl);
+  setTimeout(() => dmgEl.remove(), 1200);
+}
+
+function highlightActing(containerId, idx) {
+  document.querySelectorAll(`#${containerId} .battle-animal`).forEach(el => el.classList.remove('acting'));
+  const el = document.getElementById(`ba-${containerId}-${idx}`);
+  if (el) el.classList.add('acting');
+}
+
+function addLog(text, type = 'normal') {
+  const log = document.getElementById('battleLog');
+  const entry = document.createElement('div');
+  entry.className = `log-entry log-${type}`;
+  entry.textContent = text;
+  log.appendChild(entry);
+  log.scrollTop = log.scrollHeight;
+  state.battleLog.push(text);
+}
+
+function isTeamAlive(team) {
+  return team.some(a => a.hp > 0);
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getDelay() {
+  if (state.speed === 0) return 50;
+  if (state.speed === 2) return 400;
+  return 800;
+}
+
+function shakeScreen() {
+  document.getElementById('app').classList.add('screen-shake');
+  setTimeout(() => document.getElementById('app').classList.remove('screen-shake'), 500);
+}
+
+// ===== GHOST CHAT =====
+function startGhostChat() {
+  const container = document.getElementById('ghostMessages');
+  
+  function addGhostMsg() {
+    const name = GHOST_NAMES[Math.floor(Math.random()*GHOST_NAMES.length)];
+    const lastLog = state.battleLog[state.battleLog.length-1] || 'battle';
+    const animal = lastLog.split(' ')[0] || 'hewan';
+    const msgFn = GHOST_MSGS[Math.floor(Math.random()*GHOST_MSGS.length)];
+    const msg = msgFn(animal);
+    
+    const el = document.createElement('div');
+    el.className = 'ghost-msg';
+    el.innerHTML = `<span class="name">${name}:</span> ${msg}`;
+    container.insertBefore(el, container.firstChild);
+    
+    // Keep only 3 messages
+    while (container.children.length > 3) container.removeChild(container.lastChild);
+  }
+  
+  const interval = setInterval(() => {
+    if (!state.battleActive) { clearInterval(interval); return; }
+    addGhostMsg();
+  }, 2500 / (state.speed || 1));
+  
+  addGhostMsg();
+}
+
+// ===== SOUND =====
+let soundEnabled = true;
+
+function toggleSound() {
+  soundEnabled = !soundEnabled;
+  document.getElementById('soundToggle').textContent = soundEnabled ? '🔊' : '🔇';
+}
+
+function playSound(type) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    if (type === 'crit') {
+      osc.frequency.setValueAtTime(880, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(440, ctx.currentTime + 0.15);
+      gain.gain.setValueAtTime(0.3, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+      osc.start(); osc.stop(ctx.currentTime + 0.3);
+    } else if (type === 'ult') {
+      osc.frequency.setValueAtTime(220, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.4, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.5);
+      osc.start(); osc.stop(ctx.currentTime + 0.5);
+    } else {
+      osc.frequency.setValueAtTime(440, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.1);
+      osc.start(); osc.stop(ctx.currentTime + 0.1);
+    }
+  } catch(e) {}
+}
+
+// ===== SPEED =====
+function setSpeed(s) {
+  state.speed = s;
+  document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+  if (s === 1) document.getElementById('speed1x').classList.add('active');
+  else if (s === 2) document.getElementById('speed2x').classList.add('active');
+  else document.getElementById('speedSkip').classList.add('active');
+}
+
+// ===== END BATTLE =====
+function endBattle() {
+  state.battleActive = false;
+  
+  const playerHP = state.playerTeam.reduce((s, a) => s + Math.max(0, a.hp), 0);
+  const enemyHP = state.enemyTeam.reduce((s, a) => s + Math.max(0, a.hp), 0);
+  const playerWins = playerHP > enemyHP || (isTeamAlive(state.playerTeam) && !isTeamAlive(state.enemyTeam));
+  
+  // Find MVP (highest damage dealer = lowest enemy or just pick best)
+  const mvp = state.playerTeam.reduce((best, a) => {
+    return (a.hp > (best?.hp || -1)) ? a : best;
+  }, null);
+  
+  // Show result
+  showScreen('result-screen');
+  
+  document.getElementById('resultBanner').textContent = playerWins ? '🏆 MENANG!' : '💀 KALAH!';
+  document.getElementById('resultBanner').className = `result-banner ${playerWins ? 'result-win' : 'result-lose'}`;
+  
+  const reasons = playerWins ? WIN_REASONS : LOSE_REASONS;
+  document.getElementById('resultReason').textContent = `"${reasons[Math.floor(Math.random()*reasons.length)]}"`;
+  
+  // MVP
+  const mvpEl = document.getElementById('mvpDisplay');
+  mvpEl.innerHTML = `
+    <div class="mvp-emoji">${mvp ? mvp.emoji : '❓'}</div>
+    <div class="mvp-info">
+      <h4>${mvp ? mvp.name : 'Ga ada'}</h4>
+      <p>HP tersisa: ${mvp ? Math.max(0,mvp.hp) : 0}/${mvp ? mvp.maxHp : 0}</p>
+      <p>${mvp?.dailyBoost ? '⭐ Hewan Rojali!' : `Class: ${mvp?.class || '?'}`}</p>
+    </div>
+  `;
+  
+  // Funniest moment
+  document.getElementById('funniestMoment').textContent = state.funniestMoment || state.battleLog[Math.floor(Math.random()*state.battleLog.length)] || 'Battle terlalu singkat...';
+  
+  // Share text
+  const shareMsg = `NIH TIM GUA KODE: ${state.teamCode}. Berani lawan?? kandangtarung.lol`;
+  document.getElementById('shareTextDisplay').textContent = shareMsg;
+  
+  if (playerWins) {
+    spawnConfetti();
+    if (state.soundOn) playWinSound();
+  }
+}
+
+function playWinSound() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const notes = [523, 659, 784, 1047];
+    notes.forEach((freq, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.frequency.value = freq;
+      const t = ctx.currentTime + i * 0.15;
+      gain.gain.setValueAtTime(0.3, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.3);
+      osc.start(t); osc.stop(t + 0.3);
+    });
+  } catch(e) {}
+}
+
+// ===== CONFETTI =====
+function spawnConfetti() {
+  const colors = ['#00FF88', '#FF006E', '#FFE600', '#00BFFF', '#FF6B35'];
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.background = colors[Math.floor(Math.random() * colors.length)];
+    c.style.animationDuration = (2 + Math.random() * 2) + 's';
+    c.style.animationDelay = Math.random() * 1 + 's';
+    c.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 4000);
+  }
+}
+
+// ===== SHARE =====
+function shareToWA() {
+  const msg = `NIH TIM GUA KODE: ${state.teamCode}. Berani lawan?? kandangtarung.lol?code=${state.teamCode}`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function downloadShareCard() {
+  const canvas = document.getElementById('shareCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Background
+  ctx.fillStyle = '#0a0a0f';
+  ctx.fillRect(0, 0, 1080, 1920);
+  
+  // Grid pattern
+  ctx.strokeStyle = 'rgba(0,255,136,0.05)';
+  ctx.lineWidth = 1;
+  for (let x = 0; x < 1080; x += 60) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,1920); ctx.stroke(); }
+  for (let y = 0; y < 1920; y += 60) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(1080,y); ctx.stroke(); }
+  
+  // Title
+  ctx.fillStyle = '#00FF88';
+  ctx.font = 'bold 72px Arial';
+  ctx.textAlign = 'center';
+  ctx.shadowColor = '#00FF88';
+  ctx.shadowBlur = 30;
+  ctx.fillText('KANDANG TARUNG', 540, 200);
+  ctx.shadowBlur = 0;
+  
+  // Team emoji display
+  ctx.font = '120px Arial';
+  state.playerTeam.forEach((a, i) => {
+    ctx.fillText(a.emoji, 200 + i * 300, 500);
+  });
+  
+  // Team names
+  ctx.fillStyle = '#e0e0e0';
+  ctx.font = 'bold 48px Arial';
+  ctx.fillText('TIM GUA:', 540, 620);
+  ctx.font = '40px Arial';
+  const names = state.playerTeam.map(a => a.name).join(' | ');
+  ctx.fillText(names, 540, 680);
+  
+  // Code
+  ctx.fillStyle = '#FFE600';
+  ctx.font = 'bold 56px Arial';
+  ctx.fillText(`KODE: ${state.teamCode}`, 540, 800);
+  
+  // MVP
+  const mvp = state.playerTeam.reduce((best, a) => a.hp > (best?.hp||-1) ? a : best, null);
+  if (mvp) {
+    ctx.fillStyle = '#00FF88';
+    ctx.font = 'bold 48px Arial';
+    ctx.fillText('⭐ MVP: ' + mvp.name, 540, 960);
+  }
+  
+  // Funny moment
+  ctx.fillStyle = '#888';
+  ctx.font = '36px Arial';
+  const moment = (state.funniestMoment || 'Epic battle!').substring(0, 60);
+  ctx.fillText(moment + '...', 540, 1100);
+  
+  // URL
+  ctx.fillStyle = '#00FF88';
+  ctx.font = 'bold 44px Arial';
+  ctx.fillText('Main di: kandangtarung.lol', 540, 1700);
+  
+  // Border
+  ctx.strokeStyle = '#00FF88';
+  ctx.lineWidth = 8;
+  ctx.strokeRect(20, 20, 1040, 1880);
+  
+  // Download
+  const link = document.createElement('a');
+  link.download = `kandang-tarung-${state.teamCode}.png`;
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+// ===== NAVIGATION =====
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function rematch() {
+  showScreen('battle-screen');
+  // Reset HP
+  state.playerTeam.forEach(a => { a.hp = a.maxHp; a.shield = 0; a.skipTurn = false; a.dodge = false; a.blockAll = false; a.confused = false; a.accuracy = 1; a.atkDebuff = 0; a.dmgBoost = 1; a.evolved = false; });
+  state.enemyTeam.forEach(a => { a.hp = a.maxHp; a.shield = 0; a.skipTurn = false; a.dodge = false; a.blockAll = false; a.confused = false; a.accuracy = 1; a.atkDebuff = 0; a.dmgBoost = 1; a.evolved = false; });
+  
+  const battleLog = document.getElementById('battleLog');
+  battleLog.innerHTML = '<div class="log-entry log-normal">🔄 REMATCH! Semua reset. Kali ini pasti beda hasilnya (ya kan?)</div>';
+  state.battleLog = [];
+  state.battleActive = true;
+  state.funniestMoment = '';
+  state.currentRound = 0;
+  
+  renderBattleTeams();
+  setTimeout(runBattle, 500);
+}
+
+function newTeam() {
+  state.selectedAnimals = [];
+  state.teamCode = '';
+  refreshAnimals();
+  showScreen('select-screen');
+  window.history.replaceState({}, '', window.location.pathname);
+}
+
+// ===== START =====
+document.addEventListener('DOMContentLoaded', function() {
+  // Pasang event listener setelah DOM siap
+  document.getElementById('battleBtn').addEventListener('click', startBattle);
+  document.getElementById('refreshAnimalsBtn').addEventListener('click', refreshAnimals);
+  init();
+});
+</script>
+</body>
+</html>
